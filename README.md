@@ -7,6 +7,12 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## RUN SAIL DOCKER
+Define -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+Use in the root dir sail up
+Remember to use sail in the start of all commands php or composer
+- [Docs sail](https://laravel.com/docs/9.x/sail)
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
