@@ -8,8 +8,8 @@
 </p>
 
 ## RUN SAIL DOCKER
-Define -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
-Use in the root dir sail up
+Define -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'\
+Use in the root dir sail up\
 Remember to use sail in the start of all commands php or composer
 - [Docs sail](https://laravel.com/docs/9.x/sail)
 
