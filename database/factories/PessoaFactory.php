@@ -2,10 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\Pessoa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PessoaFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Pessoa::class;
+
     /**
      * Define the model's default state.
      *
@@ -14,10 +22,12 @@ class PessoaFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail(),
-            'telefone_1' => $this->faker->phoneNumber,
-            'telefone_2' => $this->faker->phoneNumber,
+            'nome' => $this->faker->word,
+        'telefone_1' => $this->faker->word,
+        'telefone_2' => $this->faker->word,
+        'email' => $this->faker->word,
+        'created_at' => $this->faker->date('Y-m-d H:i:s'),
+        'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }
 }
