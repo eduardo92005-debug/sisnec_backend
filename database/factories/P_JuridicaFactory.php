@@ -15,8 +15,9 @@ class P_JuridicaFactory extends Factory
      */
     public function definition()
     {
+        $cnpjFaker =  $this->faker->randomNumber(2,true) . '.' . $this->faker->randomNumber(3,true) . '/' . $this->faker->randomNumber(4,true) . '-' . $this->faker->randomNumber(2,true);
         return [
-            'cnpj' => $this->faker->randomNumber(9),
+            'cnpj' => $cnpjFaker,
             'nome_fantasia' => $this->faker->name(),
             'inscricao_estadual' => $this->faker->randomNumber(9),
             'razao_social' => $this->faker->name(),

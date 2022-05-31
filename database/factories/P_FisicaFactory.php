@@ -14,8 +14,9 @@ class P_FisicaFactory extends Factory
      */
     public function definition()
     {
+        $cpfFaker =  $this->faker->randomNumber(3,true) . '.' . $this->faker->randomNumber(3,true) . '.' . $this->faker->randomNumber(3,true) . '-' . $this->faker->randomNumber(2,true);
         return [
-            'cpf' => $this->faker->phoneNumber,
+            'cpf' =>$cpfFaker,
             'pessoa_id' => $this->faker->unique()->numberBetween(1, Pessoa::count()),
         ];
     }

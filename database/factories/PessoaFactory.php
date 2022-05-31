@@ -14,7 +14,7 @@ class PessoaFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->name(),
+            'nome' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail(),
             'telefone_1' => $this->faker->phoneNumber,
             'telefone_2' => $this->faker->phoneNumber,
