@@ -12,9 +12,9 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function test_route_pessoa()
     {
-        $response = $this->get('/');
+        $response = $this->get('/api/v1/pessoas');
 
         $response->assertStatus(200);
     }

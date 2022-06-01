@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePessoasTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,12 +15,13 @@ class CreatePessoasTable extends Migration
     public function up()
     {
         Schema::create('pessoas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->string('nome');
+            $table->string('telefone_1');
+            $table->string('telefone_2');
+            $table->string('email');
             $table->timestamps();
-            $table->string("nome");
-            $table->string("telefone_1");
-            $table->string("telefone_2");
-            $table->string("email");
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +32,6 @@ class CreatePessoasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pessoas');
+        Schema::drop('pessoas');
     }
 }
