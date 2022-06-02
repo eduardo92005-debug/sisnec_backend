@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePJuridicasTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,13 +15,14 @@ class CreatePJuridicasTable extends Migration
     public function up()
     {
         Schema::create('p__juridicas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->string('cnpj', 25)->unique();
+            $table->string('nome_fantasia');
+            $table->string('inscricao_estadual')->unique();
+            $table->string('razao_social');
             $table->timestamps();
-            $table->string("cnpj")->unique();
-            $table->string("nome_fantasia");
-            $table->string("inscricao_estadual")->unique();
-            $table->string("razao_social");
-            $table->foreignId('pessoa_id')->unique()->constrained("pessoas");
+            $table->softDeletes();
+            $table->foreignId('pessoa_id')->unique()->constrained("pessoas")->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -31,8 +33,6 @@ class CreatePJuridicasTable extends Migration
      */
     public function down()
     {
-        Schema::table('p__juridicas', function (Blueprint $table) {
-            $table->foreignId('pessoa_id')->constrained("pessoas")->onDelete('cascade');
-        });
+        Schema::drop('p__juridicas');
     }
 }

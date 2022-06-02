@@ -31,10 +31,10 @@ class DatabaseTest extends TestCase
     public function test_p_fisica_and_p_juridica_has_pessoa(){
         $pessoa = Pessoa::factory()->count(3)->create();
         $fisica = P_Fisica::factory()->createOne([
-            'pessoa_id' => $pessoa[0]->id
+            'pessoa_id' => 1
         ]);
         $juridica = P_Juridica::factory()->createOne([
-            'pessoa_id' => $pessoa[1]->id
+            'pessoa_id' => 1
         ]);
         $this->assertNotNull($fisica->pessoa);
         $this->assertNotNull($juridica->pessoa);
@@ -44,7 +44,7 @@ class DatabaseTest extends TestCase
         $cpfRegex ='/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/';
         $pessoa = Pessoa::factory()->count(3)->create();
         $fisica = P_Fisica::factory()->createOne([
-            'pessoa_id' => $pessoa[0]->id
+            'pessoa_id' => 1
         ]);
         $this->assertMatchesRegularExpression($cpfRegex, $fisica->cpf);
     }
@@ -53,7 +53,7 @@ class DatabaseTest extends TestCase
         $cnpjRegex ='/^\d{2}\.\d{3}\/\d{4}\-\d{2}$/';
         $pessoa = Pessoa::factory()->count(3)->create();
         $juridica = P_Juridica::factory()->createOne([
-            'pessoa_id' => $pessoa[0]->id
+            'pessoa_id' => 1
         ]);
         $this->assertMatchesRegularExpression($cnpjRegex, $juridica->cnpj);
     }

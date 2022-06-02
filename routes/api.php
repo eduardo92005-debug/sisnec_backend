@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('pessoas', App\Http\Controllers\API\PessoaAPIController::class);
+
+
+Route::resource('p__juridicas', App\Http\Controllers\API\P_JuridicaAPIController::class);
