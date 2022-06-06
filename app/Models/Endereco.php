@@ -5,37 +5,40 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Pessoa;
 
 /**
  * @SWG\Definition(
- *      definition="P_Juridica",
+ *      definition="Endereco",
  *      required={""},
  *      @SWG\Property(
- *          property="cnpj",
- *          description="cnpj",
+ *          property="rua",
+ *          description="rua",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="nome_fantasia",
- *          description="nome_fantasia",
+ *          property="complemento",
+ *          description="complemento",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="inscricao_estadual",
- *          description="inscricao_estadual",
+ *          property="bairro",
+ *          description="bairro",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="razao_social",
- *          description="razao_social",
+ *          property="cep",
+ *          description="cep",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="pessoa_id",
- *          description="pessoa_id",
- *          type="integer",
- *          format="int32"
+ *          property="estado",
+ *          description="estado",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="cidade",
+ *          description="cidade",
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -51,13 +54,13 @@ use App\Models\Pessoa;
  *      )
  * )
  */
-class P_Juridica extends Model
+class Endereco extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'p__juridicas';
+    public $table = 'enderecos';
     
 
     protected $dates = ['deleted_at'];
@@ -65,11 +68,14 @@ class P_Juridica extends Model
 
 
     public $fillable = [
-        'cnpj',
-        'nome_fantasia',
-        'inscricao_estadual',
-        'razao_social',
-        'pessoa_id'
+        'rua',
+        'complemento',
+        'bairro',
+        'cep',
+        'estado',
+        'cidade',
+        'p__fisicas_id',
+        'p__juridicas_id'
     ];
 
     /**
@@ -78,11 +84,12 @@ class P_Juridica extends Model
      * @var array
      */
     protected $casts = [
-        'cnpj' => 'string',
-        'nome_fantasia' => 'string',
-        'inscricao_estadual' => 'string',
-        'razao_social' => 'string',
-        'pessoa_id' => 'integer'
+        'rua' => 'string',
+        'complemento' => 'string',
+        'bairro' => 'string',
+        'cep' => 'string',
+        'estado' => 'string',
+        'cidade' => 'string',
     ];
 
     /**
@@ -94,7 +101,5 @@ class P_Juridica extends Model
         
     ];
 
-    public function pessoa(){
-        return $this->belongsTo(Pessoa::class, 'pessoa_id');
-    }
+    
 }

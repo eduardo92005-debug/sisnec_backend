@@ -5,6 +5,8 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\P_Fisica;
+use App\Models\P_Juridica;
 
 /**
  * @SWG\Definition(
@@ -83,10 +85,14 @@ class Pessoa extends Model
      */
     public static $rules = [
         'nome' => 'required|max:255',
-        'telefone_1' => 'numeric',
-        'telefone_2' => 'numeric',
         'email' => 'required|email'
     ];
 
-    
+    public function p_fisica(){
+        return $this->hasOne(P_Fisica::class);
+    }
+
+    public function p_juridica(){
+        return $this->hasOne(P_Juridica::class);
+    }
 }

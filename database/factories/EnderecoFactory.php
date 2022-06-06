@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\P_Fisica;
-use App\Models\Pessoa;
+use App\Models\Endereco;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class P_FisicaFactory extends Factory
+class EnderecoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = P_Fisica::class;
+    protected $model = Endereco::class;
 
     /**
      * Define the model's default state.
@@ -23,8 +22,14 @@ class P_FisicaFactory extends Factory
     public function definition()
     {
         return [
-        'cpf' => $this->faker->numerify('###.###.###-##'),
-        'pessoa_id' => 1,
+        'rua' => $this->faker->name(),
+        'complemento' => $this->faker->word,
+        'bairro' => $this->faker->word,
+        'cep' => $this->faker->randomNumber(),
+        'estado' => $this->faker->word,
+        'cidade' => $this->faker->word,
+        'p__fisicas_id' => null,
+        'p__juridicas_id' => null,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

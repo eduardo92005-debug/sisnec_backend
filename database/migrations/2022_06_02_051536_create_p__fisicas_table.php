@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePFisicasTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,10 +15,11 @@ class CreatePFisicasTable extends Migration
     public function up()
     {
         Schema::create('p__fisicas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
+            $table->string('cpf')->unique();
             $table->timestamps();
-            $table->string("cpf");
-            $table->foreignId('pessoa_id')->unique()->constrained("pessoas");
+            $table->softDeletes();
+            $table->foreignId('pessoa_id')->unique()->constrained("pessoas")->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -28,9 +30,6 @@ class CreatePFisicasTable extends Migration
      */
     public function down()
     {
-
-        Schema::table('p__fisicas', function (Blueprint $table) {
-            $table->foreignId('pessoa_id')->constrained("pessoas")->onDelete('cascade');
-        });
+        Schema::drop('p__fisicas');
     }
 }

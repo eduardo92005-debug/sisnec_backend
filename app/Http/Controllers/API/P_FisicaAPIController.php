@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateP_JuridicaAPIRequest;
-use App\Http\Requests\API\UpdateP_JuridicaAPIRequest;
-use App\Models\P_Juridica;
-use App\Repositories\P_JuridicaRepository;
+use App\Http\Requests\API\CreateP_FisicaAPIRequest;
+use App\Http\Requests\API\UpdateP_FisicaAPIRequest;
+use App\Models\P_Fisica;
+use App\Repositories\P_FisicaRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class P_JuridicaController
+ * Class P_FisicaController
  * @package App\Http\Controllers\API
  */
 
-class P_JuridicaAPIController extends AppBaseController
+class P_FisicaAPIController extends AppBaseController
 {
-    /** @var  P_JuridicaRepository */
-    private $pJuridicaRepository;
+    /** @var  P_FisicaRepository */
+    private $pFisicaRepository;
 
-    public function __construct(P_JuridicaRepository $pJuridicaRepo)
+    public function __construct(P_FisicaRepository $pFisicaRepo)
     {
-        $this->pJuridicaRepository = $pJuridicaRepo;
+        $this->pFisicaRepository = $pFisicaRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/p__juridicas",
-     *      summary="Get a listing of the P_Juridicas.",
-     *      tags={"P_Juridica"},
-     *      description="Get all P_Juridicas",
+     *      path="/p__fisicas",
+     *      summary="Get a listing of the P_Fisicas.",
+     *      tags={"P_Fisica"},
+     *      description="Get all P_Fisicas",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/P_Juridica")
+     *                  @SWG\Items(ref="#/definitions/P_Fisica")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,31 +59,31 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $pJuridicas = $this->pJuridicaRepository->all(
+        $pFisicas = $this->pFisicaRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($pJuridicas->toArray(), 'P  Juridicas retrieved successfully');
+        return $this->sendResponse($pFisicas->toArray(), 'P  Fisicas retrieved successfully');
     }
 
     /**
-     * @param CreateP_JuridicaAPIRequest $request
+     * @param CreateP_FisicaAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/p__juridicas",
-     *      summary="Store a newly created P_Juridica in storage",
-     *      tags={"P_Juridica"},
-     *      description="Store P_Juridica",
+     *      path="/p__fisicas",
+     *      summary="Store a newly created P_Fisica in storage",
+     *      tags={"P_Fisica"},
+     *      description="Store P_Fisica",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="P_Juridica that should be stored",
+     *          description="P_Fisica that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/P_Juridica")
+     *          @SWG\Schema(ref="#/definitions/P_Fisica")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/P_Fisica"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,13 +106,13 @@ class P_JuridicaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateP_JuridicaAPIRequest $request)
+    public function store(CreateP_FisicaAPIRequest $request)
     {
         $input = $request->all();
 
-        $pJuridica = $this->pJuridicaRepository->create($input);
+        $pFisica = $this->pFisicaRepository->create($input);
 
-        return $this->sendResponse($pJuridica->toArray(), 'P  Juridica saved successfully');
+        return $this->sendResponse($pFisica->toArray(), 'P  Fisica saved successfully');
     }
 
     /**
@@ -120,14 +120,14 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/p__juridicas/{id}",
-     *      summary="Display the specified P_Juridica",
-     *      tags={"P_Juridica"},
-     *      description="Get P_Juridica",
+     *      path="/p__fisicas/{id}",
+     *      summary="Display the specified P_Fisica",
+     *      tags={"P_Fisica"},
+     *      description="Get P_Fisica",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of P_Fisica",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/P_Fisica"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,30 +155,30 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var P_Fisica $pFisica */
+        $pFisica = $this->pFisicaRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($pFisica)) {
+            return $this->sendError('P_Fisica not found');
         }
 
-        return $this->sendResponse($pJuridica->toArray(), 'P  Juridica retrieved successfully');
+        return $this->sendResponse($pFisica->toArray(), 'P__Fisica retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateP_JuridicaAPIRequest $request
+     * @param UpdateP_FisicaAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/p__juridicas/{id}",
-     *      summary="Update the specified P_Juridica in storage",
-     *      tags={"P_Juridica"},
-     *      description="Update P_Juridica",
+     *      path="/p__fisicas/{id}",
+     *      summary="Update the specified P_Fisica in storage",
+     *      tags={"P_Fisica"},
+     *      description="Update P_Fisica",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of P_Fisica",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class P_JuridicaAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="P_Juridica that should be updated",
+     *          description="P_Fisica that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/P_Juridica")
+     *          @SWG\Schema(ref="#/definitions/P_Fisica")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/P_Fisica"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,20 +211,20 @@ class P_JuridicaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateP_JuridicaAPIRequest $request)
+    public function update($id, UpdateP_FisicaAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var P_Fisica $pFisica */
+        $pFisica = $this->pFisicaRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($pFisica)) {
+            return $this->sendError('P  Fisica not found');
         }
 
-        $pJuridica = $this->pJuridicaRepository->update($input, $id);
+        $pFisica = $this->pFisicaRepository->update($input, $id);
 
-        return $this->sendResponse($pJuridica->toArray(), 'P_Juridica updated successfully');
+        return $this->sendResponse($pFisica->toArray(), 'P_Fisica updated successfully');
     }
 
     /**
@@ -232,14 +232,14 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/p__juridicas/{id}",
-     *      summary="Remove the specified P_Juridica from storage",
-     *      tags={"P_Juridica"},
-     *      description="Delete P_Juridica",
+     *      path="/p__fisicas/{id}",
+     *      summary="Remove the specified P_Fisica from storage",
+     *      tags={"P_Fisica"},
+     *      description="Delete P_Fisica",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of P_Fisica",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,15 +267,15 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var P_Fisica $pFisica */
+        $pFisica = $this->pFisicaRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($pFisica)) {
+            return $this->sendError('P_Fisica not found');
         }
 
-        $pJuridica->delete();
+        $pFisica->delete();
 
-        return $this->sendSuccess('P  Juridica deleted successfully');
+        return $this->sendSuccess('P__Fisica deleted successfully');
     }
 }

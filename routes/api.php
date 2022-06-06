@@ -23,3 +23,9 @@ Route::resource('pessoas', App\Http\Controllers\API\PessoaAPIController::class);
 
 
 Route::resource('p__juridicas', App\Http\Controllers\API\P_JuridicaAPIController::class);
+
+
+Route::resource('p__fisicas', App\Http\Controllers\API\P_FisicaAPIController::class);
+
+
+Route::resource('enderecos', App\Http\Controllers\API\EnderecoAPIController::class);

@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateP_JuridicaAPIRequest;
-use App\Http\Requests\API\UpdateP_JuridicaAPIRequest;
-use App\Models\P_Juridica;
-use App\Repositories\P_JuridicaRepository;
+use App\Http\Requests\API\CreateEnderecoAPIRequest;
+use App\Http\Requests\API\UpdateEnderecoAPIRequest;
+use App\Models\Endereco;
+use App\Repositories\EnderecoRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class P_JuridicaController
+ * Class EnderecoController
  * @package App\Http\Controllers\API
  */
 
-class P_JuridicaAPIController extends AppBaseController
+class EnderecoAPIController extends AppBaseController
 {
-    /** @var  P_JuridicaRepository */
-    private $pJuridicaRepository;
+    /** @var  EnderecoRepository */
+    private $enderecoRepository;
 
-    public function __construct(P_JuridicaRepository $pJuridicaRepo)
+    public function __construct(EnderecoRepository $enderecoRepo)
     {
-        $this->pJuridicaRepository = $pJuridicaRepo;
+        $this->enderecoRepository = $enderecoRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/p__juridicas",
-     *      summary="Get a listing of the P_Juridicas.",
-     *      tags={"P_Juridica"},
-     *      description="Get all P_Juridicas",
+     *      path="/enderecos",
+     *      summary="Get a listing of the Enderecos.",
+     *      tags={"Endereco"},
+     *      description="Get all Enderecos",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/P_Juridica")
+     *                  @SWG\Items(ref="#/definitions/Endereco")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,31 +59,31 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $pJuridicas = $this->pJuridicaRepository->all(
+        $enderecos = $this->enderecoRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($pJuridicas->toArray(), 'P  Juridicas retrieved successfully');
+        return $this->sendResponse($enderecos->toArray(), 'Enderecos retrieved successfully');
     }
 
     /**
-     * @param CreateP_JuridicaAPIRequest $request
+     * @param CreateEnderecoAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/p__juridicas",
-     *      summary="Store a newly created P_Juridica in storage",
-     *      tags={"P_Juridica"},
-     *      description="Store P_Juridica",
+     *      path="/enderecos",
+     *      summary="Store a newly created Endereco in storage",
+     *      tags={"Endereco"},
+     *      description="Store Endereco",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="P_Juridica that should be stored",
+     *          description="Endereco that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/P_Juridica")
+     *          @SWG\Schema(ref="#/definitions/Endereco")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/Endereco"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,13 +106,13 @@ class P_JuridicaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateP_JuridicaAPIRequest $request)
+    public function store(CreateEnderecoAPIRequest $request)
     {
         $input = $request->all();
 
-        $pJuridica = $this->pJuridicaRepository->create($input);
+        $endereco = $this->enderecoRepository->create($input);
 
-        return $this->sendResponse($pJuridica->toArray(), 'P  Juridica saved successfully');
+        return $this->sendResponse($endereco->toArray(), 'Endereco saved successfully');
     }
 
     /**
@@ -120,14 +120,14 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/p__juridicas/{id}",
-     *      summary="Display the specified P_Juridica",
-     *      tags={"P_Juridica"},
-     *      description="Get P_Juridica",
+     *      path="/enderecos/{id}",
+     *      summary="Display the specified Endereco",
+     *      tags={"Endereco"},
+     *      description="Get Endereco",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of Endereco",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/Endereco"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,30 +155,30 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var Endereco $endereco */
+        $endereco = $this->enderecoRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($endereco)) {
+            return $this->sendError('Endereco not found');
         }
 
-        return $this->sendResponse($pJuridica->toArray(), 'P  Juridica retrieved successfully');
+        return $this->sendResponse($endereco->toArray(), 'Endereco retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateP_JuridicaAPIRequest $request
+     * @param UpdateEnderecoAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/p__juridicas/{id}",
-     *      summary="Update the specified P_Juridica in storage",
-     *      tags={"P_Juridica"},
-     *      description="Update P_Juridica",
+     *      path="/enderecos/{id}",
+     *      summary="Update the specified Endereco in storage",
+     *      tags={"Endereco"},
+     *      description="Update Endereco",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of Endereco",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class P_JuridicaAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="P_Juridica that should be updated",
+     *          description="Endereco that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/P_Juridica")
+     *          @SWG\Schema(ref="#/definitions/Endereco")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/Endereco"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,20 +211,20 @@ class P_JuridicaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateP_JuridicaAPIRequest $request)
+    public function update($id, UpdateEnderecoAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var Endereco $endereco */
+        $endereco = $this->enderecoRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($endereco)) {
+            return $this->sendError('Endereco not found');
         }
 
-        $pJuridica = $this->pJuridicaRepository->update($input, $id);
+        $endereco = $this->enderecoRepository->update($input, $id);
 
-        return $this->sendResponse($pJuridica->toArray(), 'P_Juridica updated successfully');
+        return $this->sendResponse($endereco->toArray(), 'Endereco updated successfully');
     }
 
     /**
@@ -232,14 +232,14 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/p__juridicas/{id}",
-     *      summary="Remove the specified P_Juridica from storage",
-     *      tags={"P_Juridica"},
-     *      description="Delete P_Juridica",
+     *      path="/enderecos/{id}",
+     *      summary="Remove the specified Endereco from storage",
+     *      tags={"Endereco"},
+     *      description="Delete Endereco",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of Endereco",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,15 +267,15 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var Endereco $endereco */
+        $endereco = $this->enderecoRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($endereco)) {
+            return $this->sendError('Endereco not found');
         }
 
-        $pJuridica->delete();
+        $endereco->delete();
 
-        return $this->sendSuccess('P  Juridica deleted successfully');
+        return $this->sendSuccess('Endereco deleted successfully');
     }
 }

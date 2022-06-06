@@ -6,7 +6,405 @@
     },
     "basePath": "/api/v1",
     "paths": {
-        "/pJuridicas": {
+        "/enderecos": {
+            "get": {
+                "tags": [
+                    "Endereco"
+                ],
+                "summary": "Get a listing of the Enderecos.",
+                "description": "Get all Enderecos",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Endereco"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Endereco"
+                ],
+                "summary": "Store a newly created Endereco in storage",
+                "description": "Store Endereco",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Endereco that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Endereco"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Endereco"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/enderecos/{id}": {
+            "get": {
+                "tags": [
+                    "Endereco"
+                ],
+                "summary": "Display the specified Endereco",
+                "description": "Get Endereco",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Endereco",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Endereco"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Endereco"
+                ],
+                "summary": "Update the specified Endereco in storage",
+                "description": "Update Endereco",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Endereco",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Endereco that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Endereco"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Endereco"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Endereco"
+                ],
+                "summary": "Remove the specified Endereco from storage",
+                "description": "Delete Endereco",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Endereco",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/p__fisicas": {
+            "get": {
+                "tags": [
+                    "P_Fisica"
+                ],
+                "summary": "Get a listing of the P_Fisicas.",
+                "description": "Get all P_Fisicas",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/P_Fisica"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "P_Fisica"
+                ],
+                "summary": "Store a newly created P_Fisica in storage",
+                "description": "Store P_Fisica",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "P_Fisica that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/P_Fisica"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/P_Fisica"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/p__fisicas/{id}": {
+            "get": {
+                "tags": [
+                    "P_Fisica"
+                ],
+                "summary": "Display the specified P_Fisica",
+                "description": "Get P_Fisica",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of P_Fisica",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/P_Fisica"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "P_Fisica"
+                ],
+                "summary": "Update the specified P_Fisica in storage",
+                "description": "Update P_Fisica",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of P_Fisica",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "P_Fisica that should be updated",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/P_Fisica"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/P_Fisica"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "P_Fisica"
+                ],
+                "summary": "Remove the specified P_Fisica from storage",
+                "description": "Delete P_Fisica",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of P_Fisica",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/p__juridicas": {
             "get": {
                 "tags": [
                     "P_Juridica"
@@ -80,7 +478,7 @@
                 }
             }
         },
-        "/pJuridicas/{id}": {
+        "/p__juridicas/{id}": {
             "get": {
                 "tags": [
                     "P_Juridica"
@@ -406,6 +804,73 @@
         }
     },
     "definitions": {
+        "Endereco": {
+            "required": [
+                ""
+            ],
+            "properties": {
+                "rua": {
+                    "description": "rua",
+                    "type": "string"
+                },
+                "complemento": {
+                    "description": "complemento",
+                    "type": "string"
+                },
+                "bairro": {
+                    "description": "bairro",
+                    "type": "string"
+                },
+                "cep": {
+                    "description": "cep",
+                    "type": "string"
+                },
+                "estado": {
+                    "description": "estado",
+                    "type": "string"
+                },
+                "cidade": {
+                    "description": "cidade",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "P_Fisica": {
+            "required": [
+                ""
+            ],
+            "properties": {
+                "cpf": {
+                    "description": "cpf",
+                    "type": "string"
+                },
+                "pessoa_id": {
+                    "description": "pessoa_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "P_Juridica": {
             "required": [
                 ""
