@@ -5,24 +5,13 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Pessoa;
-use App\Models\Veiculo;
+use App\Models\P_Juridica;
+use App\Models\P_Fisica;
 
 /**
  * @SWG\Definition(
- *      definition="P_Fisica",
+ *      definition="Veiculo",
  *      required={""},
- *      @SWG\Property(
- *          property="cpf",
- *          description="cpf",
- *          type="string"
- *      ),
- *      @SWG\Property(
- *          property="pessoa_id",
- *          description="pessoa_id",
- *          type="integer",
- *          format="int32"
- *      ),
  *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
@@ -37,13 +26,13 @@ use App\Models\Veiculo;
  *      )
  * )
  */
-class P_Fisica extends Model
+class Veiculo extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'p__fisicas';
+    public $table = 'veiculos';
     
 
     protected $dates = ['deleted_at'];
@@ -51,8 +40,8 @@ class P_Fisica extends Model
 
 
     public $fillable = [
-        'cpf',
-        'pessoa_id'
+        'p__fisicas_id',
+        'p__juridicas_id'
     ];
 
     /**
@@ -61,8 +50,7 @@ class P_Fisica extends Model
      * @var array
      */
     protected $casts = [
-        'cpf' => 'string',
-        'pessoa_id' => 'integer'
+        
     ];
 
     /**
@@ -74,11 +62,13 @@ class P_Fisica extends Model
         
     ];
 
-    public function pessoa(){
-        return $this->belongsTo(Pessoa::class, 'pessoa_id');
+    public function p_juridica(){
+         return $this->belongsTo(P_Juridica::class, 'p__juridicas_id');
     }
 
-    public function veiculos(){
-        return $this->hasMany(Veiculo::class);
-    }
+    public function p_fisica(){
+        return $this->belongsTo(P_Fisica::class, 'p__fisicas_id');
+   }
+
+    
 }

@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Pessoa;
+use App\Models\Veiculo;
 
 /**
  * @SWG\Definition(
@@ -96,5 +97,9 @@ class P_Juridica extends Model
 
     public function pessoa(){
         return $this->belongsTo(Pessoa::class, 'pessoa_id');
+    }
+
+    public function veiculos(){
+        return $this->hasMany(Veiculo::class);
     }
 }

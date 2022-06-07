@@ -29,3 +29,9 @@ Route::resource('p__fisicas', App\Http\Controllers\API\P_FisicaAPIController::cl
 
 
 Route::resource('enderecos', App\Http\Controllers\API\EnderecoAPIController::class);
+
+
+Route::resource('veiculos', App\Http\Controllers\API\VeiculoAPIController::class);
+
+
+Route::resource('planos', App\Http\Controllers\API\PlanoAPIController::class);
