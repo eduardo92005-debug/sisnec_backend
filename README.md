@@ -16,12 +16,16 @@
     -w /var/www/html \
     laravelsail/php81-composer:latest \
     composer install --ignore-platform-reqs`
-4. Any problems or doubt, visit -> [Docs sail](https://laravel.com/docs/9.x/sail)
+4. After installation, now type in root directory sail up
+5. To make all databases and seeders use sail php artisan migrate:fresh
+6. To connect to database mysql sail mysql
+7. Remember to visit App/Config/Database and set the right configuration to database
+8. Any problems or doubt, visit -> [Docs sail](https://laravel.com/docs/8.x/)
 ## Running Sail
 1. Define an alias to use sail commands without use vendor/bin/ path -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
 2. To show localhost server use sail up to deploy containers to localhost.
 3. Anyone commands that you would use without a sail now you should use sail as a prefix.
-4. Any problems or doubt, visit -> [Docs sail](https://laravel.com/docs/9.x/sail)
+4. Any problems or doubt, visit -> [Docs sail](https://laravel.com/docs/8.x/sail)
 
 ## About Laravel
 
