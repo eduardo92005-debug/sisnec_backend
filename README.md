@@ -6,18 +6,22 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
 ## How to run
-- [Install Composer]
-- [Install PHP 7.4]
-- [Download Repository and clone to any folder]
-- [Use composer update command]
-- [Up a container with sail up]
-- 
-## RUN SAIL DOCKER
-Define -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'\
-Use in the root dir sail up\
-Remember to use sail in the start of all commands php or composer
-- [Docs sail](https://laravel.com/docs/9.x/sail)
+1. Git clone this repository
+2. Download Docker Desktop and enable virtualization
+3. `docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs`
+4. Any problems or doubt, visit -> [Docs sail](https://laravel.com/docs/9.x/sail)
+## Running Sail
+1. Define an alias to use sail commands without use vendor/bin/ path -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+2. To show localhost server use sail up to deploy containers to localhost.
+3. Anyone commands that you would use without a sail now you should use sail as a prefix.
+4. Any problems or doubt, visit -> [Docs sail](https://laravel.com/docs/9.x/sail)
 
 ## About Laravel
 
