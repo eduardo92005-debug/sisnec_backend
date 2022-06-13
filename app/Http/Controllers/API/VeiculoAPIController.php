@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Requests\API\CreateP_JuridicaAPIRequest;
-use App\Http\Requests\API\UpdateP_JuridicaAPIRequest;
-use App\Models\P_Juridica;
-use App\Repositories\P_JuridicaRepository;
+use App\Http\Requests\API\CreateVeiculoAPIRequest;
+use App\Http\Requests\API\UpdateVeiculoAPIRequest;
+use App\Models\Veiculo;
+use App\Repositories\VeiculoRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class P_JuridicaController
+ * Class VeiculoController
  * @package App\Http\Controllers\API
  */
 
-class P_JuridicaAPIController extends AppBaseController
+class VeiculoAPIController extends AppBaseController
 {
-    /** @var  P_JuridicaRepository */
-    private $pJuridicaRepository;
+    /** @var  VeiculoRepository */
+    private $veiculoRepository;
 
-    public function __construct(P_JuridicaRepository $pJuridicaRepo)
+    public function __construct(VeiculoRepository $veiculoRepo)
     {
-        $this->pJuridicaRepository = $pJuridicaRepo;
+        $this->veiculoRepository = $veiculoRepo;
     }
 
     /**
@@ -30,10 +30,10 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/p__juridicas",
-     *      summary="Get a listing of the P_Juridicas.",
-     *      tags={"P_Juridica"},
-     *      description="Get all P_Juridicas",
+     *      path="/veiculos",
+     *      summary="Get a listing of the Veiculos.",
+     *      tags={"Veiculo"},
+     *      description="Get all Veiculos",
      *      produces={"application/json"},
      *      @SWG\Response(
      *          response=200,
@@ -47,7 +47,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              @SWG\Property(
      *                  property="data",
      *                  type="array",
-     *                  @SWG\Items(ref="#/definitions/P_Juridica")
+     *                  @SWG\Items(ref="#/definitions/Veiculo")
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -59,31 +59,31 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $pJuridicas = $this->pJuridicaRepository->all(
+        $veiculos = $this->veiculoRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
         );
 
-        return $this->sendResponse($pJuridicas->toArray(), 'P  Juridicas retrieved successfully');
+        return $this->sendResponse($veiculos->toArray(), 'Veiculos retrieved successfully');
     }
 
     /**
-     * @param CreateP_JuridicaAPIRequest $request
+     * @param CreateVeiculoAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
-     *      path="/p__juridicas",
-     *      summary="Store a newly created P_Juridica in storage",
-     *      tags={"P_Juridica"},
-     *      description="Store P_Juridica",
+     *      path="/veiculos",
+     *      summary="Store a newly created Veiculo in storage",
+     *      tags={"Veiculo"},
+     *      description="Store Veiculo",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="P_Juridica that should be stored",
+     *          description="Veiculo that should be stored",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/P_Juridica")
+     *          @SWG\Schema(ref="#/definitions/Veiculo")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -96,7 +96,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/Veiculo"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -106,13 +106,13 @@ class P_JuridicaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateP_JuridicaAPIRequest $request)
+    public function store(CreateVeiculoAPIRequest $request)
     {
         $input = $request->all();
 
-        $pJuridica = $this->pJuridicaRepository->create($input);
+        $veiculo = $this->veiculoRepository->create($input);
 
-        return $this->sendResponse($pJuridica->toArray(), 'P  Juridica saved successfully');
+        return $this->sendResponse($veiculo->toArray(), 'Veiculo saved successfully');
     }
 
     /**
@@ -120,14 +120,14 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Get(
-     *      path="/p__juridicas/{id}",
-     *      summary="Display the specified P_Juridica",
-     *      tags={"P_Juridica"},
-     *      description="Get P_Juridica",
+     *      path="/veiculos/{id}",
+     *      summary="Display the specified Veiculo",
+     *      tags={"Veiculo"},
+     *      description="Get Veiculo",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of Veiculo",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -143,7 +143,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/Veiculo"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -155,30 +155,30 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function show($id)
     {
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var Veiculo $veiculo */
+        $veiculo = $this->veiculoRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($veiculo)) {
+            return $this->sendError('Veiculo not found');
         }
 
-        return $this->sendResponse($pJuridica->toArray(), 'P  Juridica retrieved successfully');
+        return $this->sendResponse($veiculo->toArray(), 'Veiculo retrieved successfully');
     }
 
     /**
      * @param int $id
-     * @param UpdateP_JuridicaAPIRequest $request
+     * @param UpdateVeiculoAPIRequest $request
      * @return Response
      *
      * @SWG\Put(
-     *      path="/p__juridicas/{id}",
-     *      summary="Update the specified P_Juridica in storage",
-     *      tags={"P_Juridica"},
-     *      description="Update P_Juridica",
+     *      path="/veiculos/{id}",
+     *      summary="Update the specified Veiculo in storage",
+     *      tags={"Veiculo"},
+     *      description="Update Veiculo",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of Veiculo",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -186,9 +186,9 @@ class P_JuridicaAPIController extends AppBaseController
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="P_Juridica that should be updated",
+     *          description="Veiculo that should be updated",
      *          required=false,
-     *          @SWG\Schema(ref="#/definitions/P_Juridica")
+     *          @SWG\Schema(ref="#/definitions/Veiculo")
      *      ),
      *      @SWG\Response(
      *          response=200,
@@ -201,7 +201,7 @@ class P_JuridicaAPIController extends AppBaseController
      *              ),
      *              @SWG\Property(
      *                  property="data",
-     *                  ref="#/definitions/P_Juridica"
+     *                  ref="#/definitions/Veiculo"
      *              ),
      *              @SWG\Property(
      *                  property="message",
@@ -211,20 +211,20 @@ class P_JuridicaAPIController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateP_JuridicaAPIRequest $request)
+    public function update($id, UpdateVeiculoAPIRequest $request)
     {
         $input = $request->all();
 
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var Veiculo $veiculo */
+        $veiculo = $this->veiculoRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($veiculo)) {
+            return $this->sendError('Veiculo not found');
         }
 
-        $pJuridica = $this->pJuridicaRepository->update($input, $id);
+        $veiculo = $this->veiculoRepository->update($input, $id);
 
-        return $this->sendResponse($pJuridica->toArray(), 'P_Juridica updated successfully');
+        return $this->sendResponse($veiculo->toArray(), 'Veiculo updated successfully');
     }
 
     /**
@@ -232,14 +232,14 @@ class P_JuridicaAPIController extends AppBaseController
      * @return Response
      *
      * @SWG\Delete(
-     *      path="/p__juridicas/{id}",
-     *      summary="Remove the specified P_Juridica from storage",
-     *      tags={"P_Juridica"},
-     *      description="Delete P_Juridica",
+     *      path="/veiculos/{id}",
+     *      summary="Remove the specified Veiculo from storage",
+     *      tags={"Veiculo"},
+     *      description="Delete Veiculo",
      *      produces={"application/json"},
      *      @SWG\Parameter(
      *          name="id",
-     *          description="id of P_Juridica",
+     *          description="id of Veiculo",
      *          type="integer",
      *          required=true,
      *          in="path"
@@ -267,15 +267,15 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var P_Juridica $pJuridica */
-        $pJuridica = $this->pJuridicaRepository->find($id);
+        /** @var Veiculo $veiculo */
+        $veiculo = $this->veiculoRepository->find($id);
 
-        if (empty($pJuridica)) {
-            return $this->sendError('P  Juridica not found');
+        if (empty($veiculo)) {
+            return $this->sendError('Veiculo not found');
         }
 
-        $pJuridica->delete();
+        $veiculo->delete();
 
-        return $this->sendSuccess('P  Juridica deleted successfully');
+        return $this->sendSuccess('Veiculo deleted successfully');
     }
 }

@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Models\Pessoa;
-use App\Models\P_Fisica;
-use App\Models\P_Juridica;
+use App\Models\Pessoa as Pessoa;
+use App\Models\P_Fisica as P_Fisica;
+use App\Models\P_Juridica as P_Juridica;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -29,13 +29,9 @@ class DatabaseTest extends TestCase
     }
 
     public function test_p_fisica_and_p_juridica_has_pessoa(){
-        $pessoa = Pessoa::factory()->count(3)->create();
-        $fisica = P_Fisica::factory()->createOne([
-            'pessoa_id' => 1
-        ]);
-        $juridica = P_Juridica::factory()->createOne([
-            'pessoa_id' => 1
-        ]);
+        $pessoa = Pessoa::factory()->createOne();
+        $fisica = P_Fisica::factory()->createOne(['pessoa_id' => $pessoa->id ]);
+        $juridica = P_Juridica::factory()->createOne(['pessoa_id' => $pessoa->id ]);
         $this->assertNotNull($fisica->pessoa);
         $this->assertNotNull($juridica->pessoa);
     }
@@ -44,16 +40,17 @@ class DatabaseTest extends TestCase
         $cpfRegex ='/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/';
         $pessoa = Pessoa::factory()->count(3)->create();
         $fisica = P_Fisica::factory()->createOne([
-            'pessoa_id' => 1
+            'pessoa_id' => $pessoa[0]->id
         ]);
         $this->assertMatchesRegularExpression($cpfRegex, $fisica->cpf);
     }
 
     public function test_p_juridica_returns_correctly_cnpj(){
-        $cnpjRegex ='/^\d{2}\.\d{3}\/\d{4}\-\d{2}$/';
+        $cnpjRegex ='/^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/';
         $pessoa = Pessoa::factory()->count(3)->create();
-        $juridica = P_Juridica::factory()->createOne([
-            'pessoa_id' => 1
+        $juridica = P_Juridica::
+        factory()->createOne([
+            'pessoa_id' => $pessoa[0]->id
         ]);
         $this->assertMatchesRegularExpression($cnpjRegex, $juridica->cnpj);
     }

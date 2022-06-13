@@ -5,31 +5,39 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\P_Fisica;
-use App\Models\P_Juridica;
 
 /**
  * @SWG\Definition(
- *      definition="Pessoa",
- *      required={"nome", "email"},
+ *      definition="Endereco",
+ *      required={""},
  *      @SWG\Property(
- *          property="nome",
- *          description="nome",
+ *          property="rua",
+ *          description="rua",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="telefone_1",
- *          description="telefone_1",
+ *          property="complemento",
+ *          description="complemento",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="telefone_2",
- *          description="telefone_2",
+ *          property="bairro",
+ *          description="bairro",
  *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="email",
- *          description="email",
+ *          property="cep",
+ *          description="cep",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="estado",
+ *          description="estado",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="cidade",
+ *          description="cidade",
  *          type="string"
  *      ),
  *      @SWG\Property(
@@ -46,13 +54,13 @@ use App\Models\P_Juridica;
  *      )
  * )
  */
-class Pessoa extends Model
+class Endereco extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'pessoas';
+    public $table = 'enderecos';
     
 
     protected $dates = ['deleted_at'];
@@ -60,10 +68,14 @@ class Pessoa extends Model
 
 
     public $fillable = [
-        'nome',
-        'telefone_1',
-        'telefone_2',
-        'email'
+        'rua',
+        'complemento',
+        'bairro',
+        'cep',
+        'estado',
+        'cidade',
+        'p__fisicas_id',
+        'p__juridicas_id'
     ];
 
     /**
@@ -72,10 +84,12 @@ class Pessoa extends Model
      * @var array
      */
     protected $casts = [
-        'nome' => 'string',
-        'telefone_1' => 'string',
-        'telefone_2' => 'string',
-        'email' => 'string'
+        'rua' => 'string',
+        'complemento' => 'string',
+        'bairro' => 'string',
+        'cep' => 'string',
+        'estado' => 'string',
+        'cidade' => 'string',
     ];
 
     /**
@@ -84,15 +98,8 @@ class Pessoa extends Model
      * @var array
      */
     public static $rules = [
-        'nome' => 'required|max:255',
-        'email' => 'required|email'
+        
     ];
 
-    public function p_fisica(){
-        return $this->hasOne(P_Fisica::class);
-    }
-
-    public function p_juridica(){
-        return $this->hasOne(P_Juridica::class);
-    }
+    
 }

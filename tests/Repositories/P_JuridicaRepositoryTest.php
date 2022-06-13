@@ -1,6 +1,7 @@
 <?php namespace Tests\Repositories;
 
 use App\Models\P_Juridica;
+use App\Models\Pessoa;
 use App\Repositories\P_JuridicaRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -26,7 +27,8 @@ class P_JuridicaRepositoryTest extends TestCase
      */
     public function test_create_p__juridica()
     {
-        $pJuridica = P_Juridica::factory()->make()->toArray();
+        $pessoa = Pessoa::factory()->createOne();
+        $pJuridica = P_Juridica::factory()->make(['pessoa_id' => $pessoa->id ])->toArray();
 
         $createdP_Juridica = $this->pJuridicaRepo->create($pJuridica);
 
@@ -42,7 +44,8 @@ class P_JuridicaRepositoryTest extends TestCase
      */
     public function test_read_p__juridica()
     {
-        $pJuridica = P_Juridica::factory()->create();
+        $pessoa = Pessoa::factory()->createOne();
+        $pJuridica = P_Juridica::factory()->create(['pessoa_id' => $pessoa->id ]);
 
         $dbP_Juridica = $this->pJuridicaRepo->find($pJuridica->id);
 
@@ -55,8 +58,9 @@ class P_JuridicaRepositoryTest extends TestCase
      */
     public function test_update_p__juridica()
     {
-        $pJuridica = P_Juridica::factory()->create();
-        $fakeP_Juridica = P_Juridica::factory()->make()->toArray();
+        $pessoa = Pessoa::factory()->createOne();
+        $pJuridica = P_Juridica::factory()->create(['pessoa_id' => $pessoa->id ]);
+        $fakeP_Juridica = P_Juridica::factory()->make(['pessoa_id' => $pessoa->id ])->toArray();
 
         $updatedP_Juridica = $this->pJuridicaRepo->update($fakeP_Juridica, $pJuridica->id);
 
@@ -70,7 +74,8 @@ class P_JuridicaRepositoryTest extends TestCase
      */
     public function test_delete_p__juridica()
     {
-        $pJuridica = P_Juridica::factory()->create();
+        $pessoa = Pessoa::factory()->createOne();
+        $pJuridica = P_Juridica::factory()->create(['pessoa_id' => $pessoa->id ]);
 
         $resp = $this->pJuridicaRepo->delete($pJuridica->id);
 
