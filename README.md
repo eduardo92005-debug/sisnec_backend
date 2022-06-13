@@ -6,7 +6,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-
+## How to run
+- [Install Composer]
+- [Install PHP 7.4]
+- [Download Repository and clone to any folder]
+- [Use composer update command]
+- [Up a container with sail up]
+- 
 ## RUN SAIL DOCKER
 Define -> alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'\
 Use in the root dir sail up\
