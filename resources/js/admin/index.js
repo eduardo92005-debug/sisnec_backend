@@ -4,3 +4,6 @@ import './profile-edit-password';
 import './pessoa';
 import './endereco';
 import './p-fisica';
+import './p-juridica';
+import './veiculo';
+import './plano';

@@ -88,3 +88,48 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
         });
     });
 });
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('p-juridicas')->name('p-juridicas/')->group(static function() {
+            Route::get('/',                                             'PJuridicasController@index')->name('index');
+            Route::get('/create',                                       'PJuridicasController@create')->name('create');
+            Route::post('/',                                            'PJuridicasController@store')->name('store');
+            Route::get('/{pJuridica}/edit',                             'PJuridicasController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'PJuridicasController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{pJuridica}',                                 'PJuridicasController@update')->name('update');
+            Route::delete('/{pJuridica}',                               'PJuridicasController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('veiculos')->name('veiculos/')->group(static function() {
+            Route::get('/',                                             'VeiculosController@index')->name('index');
+            Route::get('/create',                                       'VeiculosController@create')->name('create');
+            Route::post('/',                                            'VeiculosController@store')->name('store');
+            Route::get('/{veiculo}/edit',                               'VeiculosController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'VeiculosController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{veiculo}',                                   'VeiculosController@update')->name('update');
+            Route::delete('/{veiculo}',                                 'VeiculosController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('planos')->name('planos/')->group(static function() {
+            Route::get('/',                                             'PlanosController@index')->name('index');
+            Route::get('/create',                                       'PlanosController@create')->name('create');
+            Route::post('/',                                            'PlanosController@store')->name('store');
+            Route::get('/{plano}/edit',                                 'PlanosController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'PlanosController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{plano}',                                     'PlanosController@update')->name('update');
+            Route::delete('/{plano}',                                   'PlanosController@destroy')->name('destroy');
+        });
+    });
+});

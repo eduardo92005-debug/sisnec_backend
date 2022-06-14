@@ -89,5 +89,59 @@ return [
         ],
     ],
 
+    'p-juridica' => [
+        'title' => 'P  Juridicas',
+
+        'actions' => [
+            'index' => 'P  Juridicas',
+            'create' => 'New P  Juridica',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'cnpj' => 'Cnpj',
+            'nome_fantasia' => 'Nome fantasia',
+            'inscricao_estadual' => 'Inscricao estadual',
+            'razao_social' => 'Razao social',
+            'pessoa_id' => 'Pessoa',
+            
+        ],
+    ],
+
+    'veiculo' => [
+        'title' => 'Veiculos',
+
+        'actions' => [
+            'index' => 'Veiculos',
+            'create' => 'New Veiculo',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'p__fisicas_id' => 'P  fisicas',
+            'p__juridicas_id' => 'P  juridicas',
+            
+        ],
+    ],
+
+    'plano' => [
+        'title' => 'Planos',
+
+        'actions' => [
+            'index' => 'Planos',
+            'create' => 'New Plano',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'p__fisicas_id' => 'P  fisicas',
+            'p__juridicas_id' => 'P  juridicas',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

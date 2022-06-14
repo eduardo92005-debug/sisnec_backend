@@ -90,6 +90,7 @@ class PFisicasController extends Controller
     {
         // Sanitize input
         $sanitized = $request->getSanitized();
+        //Use sanitezed request for  get data foreign key id (pessoa_id)
         $sanitized['pessoa_id'] = $request->getPessoaId();
         // Store the PFisica
         $pFisica = PFisica::create($sanitized);
