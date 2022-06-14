@@ -14,7 +14,7 @@
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/var/www/html \
     -w /var/www/html \
-    laravelsail/php81-composer:latest \
+    laravelsail/php74-composer:latest \
     composer install --ignore-platform-reqs`
 4. After installation, now type in root directory -> sail up
 5. To make all databases and seeders use -> sail php artisan migrate:fresh
