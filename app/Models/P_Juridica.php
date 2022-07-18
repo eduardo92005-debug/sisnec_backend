@@ -96,7 +96,7 @@ class P_Juridica extends Model
     ];
 
     public function pessoa(){
-        return $this->belongsTo(Pessoa::class, 'pessoa_id');
+        return $this->belongsTo(Pessoa::class);
     }
 
     public function veiculos(){

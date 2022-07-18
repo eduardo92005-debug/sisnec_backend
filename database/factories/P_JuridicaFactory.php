@@ -27,7 +27,7 @@ class P_JuridicaFactory extends Factory
         'nome_fantasia' => $this->faker->name,
         'inscricao_estadual' => $this->faker->numerify('##########.##-##'),
         'razao_social' => $this->faker->name,
-        'pessoa_id' => 1,
+        'pessoa_id' =>  $this->faker->numberBetween(1, Pessoa::count()),
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

@@ -119,6 +119,7 @@ class PessoasController extends Controller
         return view('admin.pessoa.edit', [
             'pessoa' => $pessoa,
         ]);
+        
     }
 
     /**

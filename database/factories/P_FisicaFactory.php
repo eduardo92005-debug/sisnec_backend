@@ -24,7 +24,7 @@ class P_FisicaFactory extends Factory
     {
         return [
         'cpf' => $this->faker->numerify('###.###.###-##'),
-        'pessoa_id' => 1,
+        'pessoa_id' =>  $this->faker->numberBetween(1, Pessoa::count()),
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

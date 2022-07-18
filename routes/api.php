@@ -35,3 +35,6 @@ Route::resource('veiculos', App\Http\Controllers\API\VeiculoAPIController::class
 
 
 Route::resource('planos', App\Http\Controllers\API\PlanoAPIController::class);
+
+
+Route::resource('pagamentos', App\Http\Controllers\API\PagamentoAPIController::class);

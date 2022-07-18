@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\PFisica;
 use App\Models\PJuridica;
+use App\Models\P_Juridica;
+use App\Models\Pagamento;
 
 /**
  * @SWG\Definition(
@@ -94,5 +96,14 @@ class Pessoa extends Model
 
     public function pjuridica(){
         return $this->hasOne(PJuridica::class);
+    }
+
+    public function pagamentos()
+    {
+        return $this->hasMany(Pagamento::class);
+    }
+
+    public function p_juridica(){
+        return $this->hasOne(P_Juridica::class, 'pessoa_id');
     }
 }

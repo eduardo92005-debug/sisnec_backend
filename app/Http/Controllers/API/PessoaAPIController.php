@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Requests\API\CreatePessoaAPIRequest;
 use App\Http\Requests\API\UpdatePessoaAPIRequest;
 use App\Models\Pessoa;
+use App\Models\P_Juridica;
 use App\Repositories\PessoaRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
@@ -156,10 +157,17 @@ class PessoaAPIController extends AppBaseController
     public function show($id)
     {
         /** @var Pessoa $pessoa */
+        //$pessoa = $this->pessoaRepository->find($id);
         $pessoa = $this->pessoaRepository->find($id);
-
         if (empty($pessoa)) {
             return $this->sendError('Pessoa not found');
+        }
+
+        if(!empty($pessoa->p_juridica)){
+            $pJuridica = $pessoa->p_juridica->where('pessoa_id', $id)->first();
+            $pessoa->push($pJuridica);
+        } else {
+            return $this->sendError('Pessoa Juridica not found');
         }
 
         return $this->sendResponse($pessoa->toArray(), 'Pessoa retrieved successfully');

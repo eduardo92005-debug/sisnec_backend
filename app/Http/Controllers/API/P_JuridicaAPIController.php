@@ -19,11 +19,13 @@ class P_JuridicaAPIController extends AppBaseController
 {
     /** @var  P_JuridicaRepository */
     private $pJuridicaRepository;
+    private $pessoa;
 
     public function __construct(P_JuridicaRepository $pJuridicaRepo)
     {
         $this->pJuridicaRepository = $pJuridicaRepo;
     }
+
 
     /**
      * @param Request $request
@@ -59,11 +61,14 @@ class P_JuridicaAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $pJuridicas = $this->pJuridicaRepository->all(
+       $pJuridicas = $this->pJuridicaRepository->all(
             $request->except(['skip', 'limit']),
             $request->get('skip'),
             $request->get('limit')
-        );
+       );
+       $pJuridicas = $pJuridicas->filter(function ($pJuridica) {
+            return $pJuridica->pessoa->get();
+        });
 
         return $this->sendResponse($pJuridicas->toArray(), 'P  Juridicas retrieved successfully');
     }
@@ -157,6 +162,7 @@ class P_JuridicaAPIController extends AppBaseController
     {
         /** @var P_Juridica $pJuridica */
         $pJuridica = $this->pJuridicaRepository->find($id);
+        $pJuridica->push($pJuridica->pessoa->get());
 
         if (empty($pJuridica)) {
             return $this->sendError('P  Juridica not found');
